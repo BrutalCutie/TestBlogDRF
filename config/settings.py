@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "users",
+    "blog",
 
     "rest_framework_simplejwt",  # TODO заменить на ninja_jwt
     "rest_framework",
