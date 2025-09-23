@@ -1,9 +1,14 @@
 from rest_framework import serializers
 
-from .models import Article, Commentary
+from .models import Article, Commentary, Category
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(),
+        allow_null=False
+    )
+
     class Meta:
         model = Article
         fields = "__all__"

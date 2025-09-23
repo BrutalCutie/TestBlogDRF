@@ -40,6 +40,17 @@ class Article(models.Model):
         blank=True,
     )
 
+    created_at = models.DateTimeField(
+        verbose_name='время создания',
+        auto_now_add=True,
+        null=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name='время изменения',
+        auto_now=True,
+        null=True
+    )
+
     def __str__(self):
         return f"{self.pk} | {self.author=}"
 
@@ -67,6 +78,16 @@ class Commentary(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+    )
+    created_at = models.DateTimeField(
+        verbose_name='время создания',
+        auto_now_add=True,
+        null=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name='время изменения',
+        auto_now=True,
+        null=True
     )
 
     def __str__(self):
