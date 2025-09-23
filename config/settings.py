@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "users",
+
     "rest_framework_simplejwt",  # TODO заменить на ninja_jwt
     "rest_framework",
 
@@ -133,12 +135,13 @@ USE_I18N = True
 
 USE_TZ = False
 
+AUTH_USER_MODEL = "users.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATICFILES_DIRS = [BASE_DIR / "static"]
 
 
 # Default primary key field type
