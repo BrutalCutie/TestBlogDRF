@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Article
+from .models import Article, Commentary
 from .permissions import IsOwner
 from .serializers import ArticleSerializer, CommentarySerializer
 
@@ -26,6 +26,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 class CommentaryViewSet(viewsets.ModelViewSet):
     serializer_class = CommentarySerializer
     permission_classes = [IsAuthenticated]
+    queryset = Commentary.objects.all()
 
     def perform_create(self, serializer):
         article_obj = get_object_or_404(Article, pk=self.request.data.get("article"))
