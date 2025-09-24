@@ -12,7 +12,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Article.objects.prefetch_related('commentaries').filter(is_active=True)
+        return Article.objects.prefetch_related("commentary_set").all()
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -20,6 +20,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ('destroy', 'update', 'partial_update'):
             self.permission_classes = [IsAuthenticated, IsOwner]
+        return super().get_permissions()
 
 
 class CommentaryViewSet(viewsets.ModelViewSet):
@@ -27,9 +28,11 @@ class CommentaryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        article_obj = get_object_or_404(Article, pk=self.kwargs.get("pk"))
+        article_obj = get_object_or_404(Article, pk=self.request.data.get("article"))
         serializer.save(author=self.request.user, article=article_obj)
 
     def get_permissions(self):
         if self.action in ('destroy', 'update', 'partial_update'):
             self.permission_classes = [IsAuthenticated, IsOwner]
+        return super().get_permissions()
+

@@ -14,7 +14,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         queryset=Category.objects.all(),
         allow_null=False
     )
-    commentaries = CommentarySerializer(many=True, read_only=True)
+    commentaries = CommentarySerializer(many=True, read_only=True, source='commentary_set')
 
     class Meta:
         model = Article
